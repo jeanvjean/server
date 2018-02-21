@@ -1,0 +1,13 @@
+<%- include('../partials/head') %>
+<div class="container mc">
+    <div class="row">
+        <div class="col m10 offset-m1">
+            <% for(var art of creativeArt){ %>
+                <div class="col m6">
+                    <img width="100%" src="/uploads/creativeArt/<%=art.imageUrl%>" alt=""/>
+                </div>
+            <% } %>
+        </div>
+    </div>
+</div>
+<%- include('../partials/foot') %>

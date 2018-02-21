@@ -1,0 +1,27 @@
+<%- include('../partials/head') %>
+<div class="container">
+    <div class="row">
+        <div class="section">
+            <div class="col m8 offset-m2">
+                <p>wedding</p>
+                <form action="/wedding/create" method="POST" enctype="multipart/form-data">
+                    <div class="input-field col s12">
+                      <input name="event_name" type="text" class="validate">
+                      <label for="event_name">Event</label>
+                    </div>
+                   <div class="file-field input-field">
+                     <div class="btn grey">
+                       <span>File</span>
+                       <input type="file" name="imageUrl">
+                     </div>
+                     <div class="file-path-wrapper">
+                       <input class="file-path validate" type="text">
+                     </div>
+                   </div>
+                   <input type="submit" class="btn" name="" value="Submit">
+                 </form>
+            </div>
+        </div>
+    </div>
+</div>
+<%- include('../partials/foot') %>
