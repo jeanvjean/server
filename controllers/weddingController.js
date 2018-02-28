@@ -10,15 +10,12 @@ const weddingController = {}
     }
     weddingController.post = (req,res)=>{
         console.log(req.file)
-        const lifestyle = new db.Wedding({
+        const wedding = new db.Wedding({
             event_name:req.body.event_name,
-            imageUrl:req.file.path
+            imageUrl:req.file.filename
         })
-        lifestyle.save().then((newWedding)=>{
-            return res.status(200).json({
-                success:true,
-                data:newWedding
-            })
+        wedding.save().then((newWedding)=>{
+            return res.redirect('/wedding')
         }).catch((e)=>{
             return res.status(500).json({
                 message:e

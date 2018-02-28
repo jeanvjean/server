@@ -10,13 +10,10 @@ potraitController.getCreate = (req,res)=>{
 potraitController.post = (req,res)=>{
     const potrait = new db.Potrait({
         model_name:req.body.model_name,
-        imageUrl:req.file.path
+        imageUrl:req.file.filename
     })
     potrait.save().then((newPotrait)=>{
-        return res.status(200).json({
-            success:true,
-            data:newPotrait
-        })
+        return res.redirect('/potrait')
     }).catch((e)=>{
         return res.status(500).json({
             message:e

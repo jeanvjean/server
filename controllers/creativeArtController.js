@@ -11,13 +11,10 @@ creativeArtController.get = (req,res)=>{
 creativeArtController.post = (req,res)=>{
     const creativeArt = new db.CreativeArt({
         model_name:req.body.model_name,
-        imageUrl:req.file.path
+        imageUrl:req.file.filename
     })
     creativeArt.save().then((newCreativeArt)=>{
-        return res.status(200).json({
-            success:true,
-            data:newCreativeArt
-        })
+        return res.redirect('/creativeArt')
     }).catch((e)=>{
         return res.status(500).json({
             message:e

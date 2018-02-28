@@ -9,15 +9,13 @@ lifestyleController.get = (req,res)=>{
     res.render('lifestyle/create')
 }
 lifestyleController.post = (req,res)=>{
+    console.log(req.file)
     const lifestyle = new db.Lifestyle({
         model_name:req.body.model_name,
-        imageUrl:req.file.path
+        imageUrl:req.file.filename
     })
     lifestyle.save().then((newLifestyle)=>{
-        return res.status(200).json({
-            success:true,
-            data:newLifestyle
-        })
+        return res.redirect('/lifestyle')
     }).catch((e)=>{
         return res.status(500).json({
             message:e
@@ -26,7 +24,8 @@ lifestyleController.post = (req,res)=>{
 }
     lifestyleController.index = (req,res) =>{
         db.Lifestyle.find({}).then((lifestyles)=>{
-            res.render('lifestyle/index',{lifestyles})
+            console.log(lifestyles)
+            res.render('lifestyle/index',{lifestyles:lifestyles,msg:'Upload successful'})
         }).catch((err)=>{
             res.status(500).json({
                 message:err

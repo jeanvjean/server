@@ -2,11 +2,9 @@ const express = require('express')
 const path =require('path')
 const multer =require('multer')
 const route = express()
-const passport = require('passport')
-const pasConf = require('../passport')
 
 const storage = multer.diskStorage({
-    destination: './public/uploads/lifestyles',
+    destination: './public/uploads/beauty',
     filename: function(req,file,cb) {
         cb(null,file.fieldname + '-' + Date.now() + path.extname(file.originalname))
     }
@@ -35,13 +33,13 @@ function checkFileType(file,cb){
     }
 }
 
-const lifestyleController = require('../controllers/lifestyleController')
+const beautyController = require('../controllers/beautyController')
 
-route.get('/create',passport.authenticate('jwt',{session:false}),lifestyleController.get)
-route.post('/create',upload,lifestyleController.post)
+route.get('/create',beautyController.get)
+route.post('/create',upload,beautyController.post)
 
-route.get('/',lifestyleController.index)
-route.get('/one/:id',lifestyleController.getOne)
-route.get('/delete/:id',lifestyleController.delete)
+route.get('/',beautyController.index)
+route.get('/one/:id',beautyController.getOne)
+route.get('/delete/:id',beautyController.delete)
 
 module.exports = route

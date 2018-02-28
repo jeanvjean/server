@@ -1,18 +1,17 @@
 <%- include('../partials/head') %>
 <div class="container mc">
-    <div class="row center">
-        <% for(var art of creativeArt ){ %>
-          <div class="col m6 s12">
-              <div class="">
-                  <a href=""> <img width="100%" class="image responsive-img" src="/uploads/creativeArt/<%=art.imageUrl%>" alt=""> </a>
-              </div>
-          </div>
-          <% } %>
-    </div>
-    <div class="row">
-            <div class="">
+            <div class="row center">
+                <% for(var b of beauty ){ %>
+                  <div class="col m6 s12">
+                      <div class="">
+                          <a href=""> <img width="100%" class="image responsive-img" src="/uploads/beauty/<%=b.imageUrl%>" alt=""> </a>
+                      </div>
+                  </div>
+                  <% } %>
+            </div>
+            <div class="row">
                 <div class="col m8 offset-m2">
-                    <form action="/creativeArt/create" method="POST" enctype="multipart/form-data">
+                    <form action="/beauty/create" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="input-field col s12">
                                 <input name="model_name" type="text" class="validate"/>
@@ -34,6 +33,5 @@
                  </div>
             </div>
         </div>
-    </div>
 </div>
 <%- include('../partials/foot') %>

@@ -1,13 +1,37 @@
 <%- include('../partials/head') %>
 <div class="container mc">
-    <div class="row">
-        <div class="col m10 offset-m1">
-            <% for(var wed of weddings){ %>
-                <div class="col m6">
-                    <img width="100%" src="/uploads/weddings/<%=wed.imageUrl%>" alt=""/>
-                </div>
-            <% } %>
+            <div class="row center">
+                <% for(var wed of weddings ){ %>
+                  <div class="col m6 s12">
+                      <div class="">
+                          <a href=""> <img width="100%" class="image responsive-img" src="/uploads/weddings/<%=wed.imageUrl%>" alt=""> </a>
+                      </div>
+                  </div>
+                  <% } %>
+            </div>
+            <div class="row">
+                <div class="col m8 offset-m2">
+                    <form action="/wedding/create" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <div class="input-field col s12">
+                                <input name="event_name" type="text" class="validate"/>
+                                <label for="model_name">Event</label>
+                            </div>
+                            <label>Select an Image</label>
+                            <div class="file-field input-field">
+                                <div class="btn grey small">
+                                    <span>Browse</span>
+                                    <input type="file" name="imageUrl">
+                                </div>
+                                <div class="file-path-wrapper">
+                                    <input class="file-path validate" type="text"
+                                    placeholder="File Upload">
+                                </div>
+                            </div>
+                         <input type="submit" class="btn" name="" value="Submit"/>
+                     </form>
+                 </div>
+            </div>
         </div>
-    </div>
 </div>
 <%- include('../partials/foot') %>
