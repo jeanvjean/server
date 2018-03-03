@@ -2,6 +2,7 @@ const homeController = {}
 const nodemailer = require('nodemailer')
 
     homeController.get = (req,res) => {
+        console.log(req.user)
         res.render('home/index')
     }
     homeController.getAbout = (req,res) => {

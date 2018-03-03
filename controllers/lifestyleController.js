@@ -15,7 +15,8 @@ lifestyleController.post = (req,res)=>{
         imageUrl:req.file.filename
     })
     lifestyle.save().then((newLifestyle)=>{
-        return res.redirect('/lifestyle')
+        req.flash('success', 'Added Successfully')
+        res.redirect('/lifestyle')
     }).catch((e)=>{
         return res.status(500).json({
             message:e

@@ -12,7 +12,8 @@ beautyController.post = (req,res)=>{
         imageUrl:req.file.filename
     })
     beauty.save().then((beauty)=>{
-        return res.redirect('/beauty')
+     req.flash('success', 'Added Successfully')
+     res.redirect('/beauty')
     }).catch((e)=>{
         return res.render('beauty/index')
     })

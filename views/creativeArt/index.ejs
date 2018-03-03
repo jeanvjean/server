@@ -1,4 +1,5 @@
 <%- include('../partials/head') %>
+
 <div class="container mc">
     <div class="row center">
         <% for(var art of creativeArt ){ %>
@@ -9,9 +10,10 @@
           </div>
           <% } %>
     </div>
+    <% if(isAuthenticated === true) {%>
     <div class="row">
             <div class="">
-                <div class="col m8 offset-m2">
+                <div class="col m8 offset-m2 s12">
                     <form action="/creativeArt/create" method="POST" enctype="multipart/form-data">
                         <div class="form-group">
                             <div class="input-field col s12">
@@ -35,5 +37,6 @@
             </div>
         </div>
     </div>
+    <% } %>
 </div>
 <%- include('../partials/foot') %>

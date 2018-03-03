@@ -1,9 +1,16 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
+const flash = require('connect-flash')
+const passport = require('passport')
+const session = require('express-session')
 const mongoose = require('mongoose')
-var cors = require('cors');
-var morgan = require('morgan');
+const cors = require('cors');
+const morgan = require('morgan');
+
+
+require('./config/passport')
 
 module.exports = (app)=>{
 
@@ -17,12 +24,29 @@ module.exports = (app)=>{
 
     app.set('view engine', 'ejs')
 
-    app.use(express.static('./public'))
+    app.use(express.static(__dirname + '/public'))
 
-    app.use(bodyParser.urlencoded({extended:true}))
-    app.use(bodyParser.json())
     app.use(morgan('combined'))
     app.use(cors())
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({extended:true}))
+    app.use(cookieParser())
+    app.use(session({
+        secret:'secret',
+        saveUninitialized:false,
+        resave:false
+    }))
+    app.use(passport.initialize())
+    app.use(passport.session())
+
+    app.use(flash())
+
+    app.use((req,res,next)=>{
+        res.locals.success_msg = req.flash('success')
+        res.locals.error_msg = req.flash('error')
+        res.locals.isAuthenticated = req.user ? true : false
+        next()
+    })
 
     require('./route')(app)
 }

@@ -46,3 +46,13 @@
         <br><br>
     </div>
 </div>
+<% if(success_msg) {%>
+    <div class="alert-success">
+        <%= success_msg %>
+    </div>
+<% } %>
+<% if(error_msg) {%>
+    <div class="alert-danger">
+        <%= error_msg %>
+    </div>
+<% } %>

@@ -3,6 +3,15 @@ const path =require('path')
 const multer =require('multer')
 const route = express()
 
+// const isAuthenticated = (req,res,next)=>{
+//     if (req.isAuthenticated()) {
+//         return next()
+//     }else {
+//         req.flash('error','Sorry!!! this is a restricted zone')
+//         res.redirect('/')
+//     }
+// }
+
 const storage = multer.diskStorage({
     destination: './public/uploads/beauty',
     filename: function(req,file,cb) {

@@ -1,18 +1,33 @@
 const express = require('express')
 const router = require('express-promise-router')()
-const passport = require('passport')
-const pasConf = require('../passport')
 
-const authController = require('../controllers/authController')
-const { validateBody, schemas } = require('../helpers/routeHelpers')
+const usersController = require('../controllers/usersController')
 
-    router.route('/signup')
-        .post(validateBody(schemas.authSchema),authController.signup)
+const isNotAuthenticated = (req,res,next)=>{
+    if (req.isAuthenticated()) {
+        req.flash('error','Sorry!!!You are already logged in')
+        res.redirect('/')
+    }else {
+        return next()
+    }
+}
+const isAuthenticated = (req,res,next)=>{
+    if (req.isAuthenticated()) {
+        return next()
+    }else {
+        req.flash('error','Sorry!!! You have to be registered')
+        res.redirect('/')
+    }
+}
+    router.route('/register')
+        .get(isNotAuthenticated,usersController.getRegister)
+        .post(usersController.register)
 
-    router.route('/signin')
-        .post(authController.signin)
+    router.route('/login')
+        .get(isNotAuthenticated,usersController.getLogin)
+        .post(usersController.login)
 
-    router.route('/secret')
-        .get(passport.authenticate('jwt',{session:false}),authController.secret)
+    router.route('/logout')
+        .get(isAuthenticated,usersController.logout)
 
-module.exports = router
+        module.exports = router

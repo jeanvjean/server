@@ -13,7 +13,8 @@ potraitController.post = (req,res)=>{
         imageUrl:req.file.filename
     })
     potrait.save().then((newPotrait)=>{
-        return res.redirect('/potrait')
+        req.flash('success', 'Added Successfully')
+        res.redirect('/potrait')
     }).catch((e)=>{
         return res.status(500).json({
             message:e

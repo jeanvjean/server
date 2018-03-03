@@ -24,14 +24,29 @@ module.exports = {
 
         const token = signToken(newUser)
 
-        res.status(200).json({
-            token
-        })
+        // res.status(200).json({
+        //     newUser,
+        //     token
+        // })
+        res.redirect('/user/signin')
     },
     signin:async(req,res)=>{
+        const token = signToken(req.user)
+        res.redirect('/')
+        // res.status(200).json({token})
 
     },
+    signout:async(req,res)=>{
+        req.logout()
+        res.redirect('/')
+    },
     secret:async(req,res)=>{
-        console.log('testing protection')
+        res.send('you have access to this now')
+    },
+    getSignup: async(req,res)=>{
+        res.render('home/signUp')
+    },
+    getSignin: async(req,res)=>{
+        res.render('home/signIn')
     }
 }

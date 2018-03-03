@@ -15,7 +15,8 @@ const weddingController = {}
             imageUrl:req.file.filename
         })
         wedding.save().then((newWedding)=>{
-            return res.redirect('/wedding')
+            req.flash('success', 'Added Successfully')
+            res.redirect('/wedding')
         }).catch((e)=>{
             return res.status(500).json({
                 message:e
