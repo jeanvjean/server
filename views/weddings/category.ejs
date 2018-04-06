@@ -1,0 +1,17 @@
+
+<%- include('../partials/head') %>
+<div class="container mc">
+    <a class="btn transparent light-blue-text" href="/wedding/1">Back</a>
+    <div class="row center">
+        <% for(var d of data ){ %>
+        <div class="col l5 offset-l1 m8 offset-m2 s12">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img height="500px" class="activator" src="/uploads/weddings/<%=d.file%>">
+              </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+<%- include('../partials/foot') %>

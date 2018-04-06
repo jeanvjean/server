@@ -1,13 +1,19 @@
 <%- include('../partials/head') %>
 <div class="container mc">
+    <h5 class="center-align">Potrait Photographs</h5>
     <div class="row center">
-        <% for(var pot of potraits ){ %>
-          <div class="col m6 s12">
-              <div class="">
-                  <a href=""> <img width="100%" class="image responsive-img" src="/uploads/potrait/<%=pot.imageUrl%>" alt=""> </a>
+        <% for(var p of potraits) { %>
+        <div class="col l5 m8 offset-l1 offset-m2 s12">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img height="500px" class="activator" src="/uploads/potrait/<%= p.imageUrl %>">
               </div>
-          </div>
-          <% } %>
+            </div>
+            <% if(isAuthenticated === true) {%>
+            <a href="/potrait/delete/<%= p.id %>">Delete</a>
+            <% } %>
+        </div>
+        <% } %>
     </div>
     <% if(isAuthenticated === true) {%>
     <div class="row">
@@ -38,4 +44,32 @@
     </div>
 <% } %>
 </div>
+<% if (pages > 0) { %>
+        <ul class="pagination center-align">
+            <% if (current == 1) { %>
+                <li class="disabled"><a>First</a></li>
+            <% } else { %>
+                <li><a href="/potrait/1">First</a></li>
+            <% } %>
+            <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+            <% if (i !== 1) { %>
+                <li class="disabled"><a>...</a></li>
+            <% } %>
+            <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                <% if (i == current) { %>
+                    <li class="active"><a><%= i %></a></li>
+                <% } else { %>
+                    <li><a href="/potrait/<%= i %>"><%= i %></a></li>
+                <% } %>
+                <% if (i == Number(current) + 4 && i < pages) { %>
+                    <li class="disabled"><a>...</a></li>
+                <% } %>
+            <% } %>
+            <% if (current == pages) { %>
+                <li class="disabled"><a>Last</a></li>
+            <% } else { %>
+                <li><a href="/potrait/<%= pages %>">Last</a></li>
+            <% } %>
+        </ul>
+    <% } %>
 <%- include('../partials/foot') %>

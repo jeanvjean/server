@@ -8,6 +8,16 @@
 body{
     background: #dbcbee;
 }
+#map {
+ height: 400px;
+ width: 100%;
+}
+.label{
+    font-family: tahoma;
+}
+h5{
+    font-family: Lobster;
+}
 .icon-block {
   padding: 0 15px;
 }
@@ -42,4 +52,30 @@ body{
   background-color: #f8d7da;
   border-color: #f5c6cb;
   text-align: center;
+}
+/* agile texts */
+.agile-text {
+    background: rgba(0, 0, 0, 0.58);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    bottom: -100%;
+    left: 0;
+	transition:.5s all;
+}
+.galry-grid a:hover .agile-text{
+	bottom: 0%;
+}
+.agile-text h5 {
+    font-size: 2.5em;
+    color: #fff;
+    text-align: center;
+    margin-top: 4em;
+}
+.w3agile-text.w3agile-text-small h5 {
+    margin-top: 2.2em;
+    font-size: 2em;
+}
+.w3agile-text.w3agile-text-small2 h5 {
+    margin-top: 2.8em;
 }

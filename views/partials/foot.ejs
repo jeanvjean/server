@@ -1,21 +1,39 @@
 <footer class="page-footer grey">
   <div class="footer-copyright">
     <div class="container" align="center">
-    &copy; <a class="grey-text text-lighten-3" href="http://materializecss.com">JeanValJean 2018</a>
+    &copy; <a class="grey-text text-lighten-3" href="">JeanValJean 2018</a>
     <% if(isAuthenticated === false) {%>
-    <a href="/user/login" class="btn-flat small">Login</a>
+    <a href="/login" class="btn-flat small">Login</a>
     <% } %>
     <% if(isAuthenticated === true) {%>
-     <a href="/user/logout" class="btn-flat">Logout</a>
+     <a href="/logout" class="btn-flat">Logout</a>
      <% } %>
     </div>
   </div>
 </footer>
 
 <!--  Scripts-->
+<script>
+  function initMap() {
+    var abuja = {lat: 9.0765, lng: 7.3986};
+    //new map
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 4,
+      center: abuja
+    });
+    var marker = new google.maps.Marker({
+      position: {lat:9.0305, lng:7.4868},
+      map: map
+    });
+  }
+</script>
+<script async defer
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNKwPBm1b_qIMDcR7TgAFI-h1_3GJFG9Q&callback=initMap">
+</script>
 <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
-<script src="js/materialize.js"></script>
-<script src="js/init.js"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script> -->
+<script src="/js/materialize.js"></script>
+<script src="/js/init.js"></script>
 
 </body>
 </html>

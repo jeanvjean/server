@@ -1,15 +1,32 @@
 <%- include('../partials/head') %>
 <div class="container mc">
-            <div class="row center">
-                <% for(var wed of weddings ){ %>
-                  <div class="col m6 s12">
-                      <div class="">
-                          <a href=""> <img width="100%" class="image responsive-img" src="/uploads/weddings/<%=wed.imageUrl%>" alt=""> </a>
-                      </div>
-                  </div>
-                  <% } %>
+    <h5 class="center-align">Wedding Photographs</h5>
+<div class="container center">
+    <% for(var cat of category ){ %>
+            <div class="col m12 s12">
+                <div class="">
+                    <p>
+                        <a class="btn transparent light-blue-text" href="/category/<%= cat.id %>"><%=cat.name %> </a>
+                    </p>
+                </div>
+            </div>
+    <% } %>
+</div>
+    <div class="row center">
+        <% for(var wed of weddings ){ %>
+        <div class="col l5 m8 offset-l1 offset-m2 s12">
+            <div class="card">
+              <div class="card-image waves-effect waves-block waves-light">
+                <img height="500px" class="activator" src="/uploads/weddings/<%=wed.file%>">
+              </div>
             </div>
             <% if(isAuthenticated === true) {%>
+            <a href="/wedding/delete/<%= wed.id %>">Delete</a>
+            <% } %>
+        </div>
+        <% } %>
+    </div>
+<% if(isAuthenticated === true) {%>
             <div class="row">
                 <div class="col m8 offset-m2 s12">
                     <form action="/wedding/create" method="POST" enctype="multipart/form-data">
@@ -18,11 +35,18 @@
                                 <input name="event_name" type="text" class="validate"/>
                                 <label for="model_name">Event</label>
                             </div>
+                            <div class="input-field col s12">
+                                <select name="category" >
+                                    <% for(var cat of category ){ %>
+                                    <option value="<%=cat.id %>"> <%=cat.name %> </option>
+                                     <% } %>
+                                </select>
+                            </div>
                             <label>Select an Image</label>
                             <div class="file-field input-field">
                                 <div class="btn grey small">
                                     <span>Browse</span>
-                                    <input type="file" name="imageUrl">
+                                    <input type="file" name="file">
                                 </div>
                                 <div class="file-path-wrapper">
                                     <input class="file-path validate" type="text"
@@ -36,4 +60,32 @@
         </div>
 <% } %>
 </div>
+        <% if (pages > 0) { %>
+                <ul class="pagination center-align">
+                    <% if (current == 1) { %>
+                        <li class="disabled"><a>First</a></li>
+                    <% } else { %>
+                        <li><a href="/wedding/1">First</a></li>
+                    <% } %>
+                    <% var i = (Number(current) > 5 ? Number(current) - 4 : 1) %>
+                    <% if (i !== 1) { %>
+                        <li class="disabled"><a>...</a></li>
+                    <% } %>
+                    <% for (; i <= (Number(current) + 4) && i <= pages; i++) { %>
+                        <% if (i == current) { %>
+                            <li class="active"><a><%= i %></a></li>
+                        <% } else { %>
+                            <li><a href="/wedding/<%= i %>"><%= i %></a></li>
+                        <% } %>
+                        <% if (i == Number(current) + 4 && i < pages) { %>
+                            <li class="disabled"><a>...</a></li>
+                        <% } %>
+                    <% } %>
+                    <% if (current == pages) { %>
+                        <li class="disabled"><a>Last</a></li>
+                    <% } else { %>
+                        <li><a href="/wedding/<%= pages %>">Last</a></li>
+                    <% } %>
+                </ul>
+            <% } %>
 <%- include('../partials/foot') %>
